@@ -37,7 +37,7 @@
 <p align="center" class="mine">Docker LNMP</p>
 
 <p class="desc">
-	Version：3.0<br />
+	Version：3.2<br />
 	Time：<?= date_default_timezone_get() . "&nbsp;/&nbsp;" . date("Y-m-d H:i:s");?>
 </p>
 

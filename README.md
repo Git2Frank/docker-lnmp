@@ -1,4 +1,4 @@
-## Docker LNMP 3.0
+## Docker LNMP 3.2
 
 Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在短时间内随意构建不同版本的相关服务、环境统一分布在不同服务器等，使开发者能够更专注于开发业务本身。
 
@@ -12,8 +12,8 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 
 ##### 版本及组件
 
-* 当前版本：3.0
-* 自带组件：PHP/FPM 7.2、Nginx latest、Mysql 5.6、Redis 4.0
+* 当前版本：3.2
+* 自带组件：PHP/FPM 7.2、Nginx latest、Mysql 8.0、phpMyAdmin/phpMyAdmin、Redis 4.0
 
 ##### 目录结构
 
@@ -54,10 +54,10 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
     sudo docker ps
     
     # 启动部分服务在后边加服务名，不加表示启动所有，-d 表示在后台运行
-    sudo docker-compose up [nginx|php72|mysql|redis] -d
+    sudo docker-compose up [nginx|php72|mysql|phpmyadmin|redis] -d
     
     # 停止和启动类似
-    sudo docker-compose stop [nginx|php72|mysql|redis]
+    sudo docker-compose stop [nginx|php72|mysql|phpmyadmin|redis]
 
     # 删除所有未运行的容器
     sudo docker rm $(docker ps -a -q)
