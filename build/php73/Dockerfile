@@ -1,4 +1,4 @@
-FROM php:7.2.10-fpm
+FROM php:7.3-fpm
 
 # ARGS
 ARG CHANGE_SOURCE=false
@@ -17,7 +17,7 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
 RUN apt-get -o Acquire::Check-Valid-Until=false update && apt-get -y upgrade
 
 # Install Base Components
-RUN apt-get install -y --no-install-recommends mysql-client libpq-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev  ntpdate cron vim unzip git
+RUN apt-get install -y --no-install-recommends mysql-client libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev  ntpdate cron vim unzip git
 
 ####################################################################################
 # Install Extension
@@ -27,15 +27,12 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 RUN docker-php-ext-install gd pdo_mysql mysqli pgsql pdo_pgsql
 
 # Redis
-COPY redis-4.1.1.tgz /home/redis.tgz
-RUN pecl install /home/redis.tgz \
-	&& echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
+RUN pecl install redis-4.2.0 \
+	&& docker-php-ext-enable redis
 
-# Mcrypt
-COPY mcrypt-1.0.0.tgz /home/mcrypt.tgz
-RUN apt-get install -y libmcrypt-dev libmhash-dev \
-	&& pecl install /home/mcrypt.tgz \
-	&& echo "extension=mcrypt.so" > /usr/local/etc/php/conf.d/mcrypt.ini
+# Xdebug
+RUN pecl install xdebug-2.7.0beta1 \
+	&& docker-php-ext-enable xdebug
 
 # PHP Composer
 ADD composer.phar /usr/local/bin/composer

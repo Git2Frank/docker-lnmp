@@ -24,7 +24,7 @@
 			background: #F95445;
 			display: block;
 			width: 180px;
-			margin:0 auto;
+			margin:20px auto;
 			text-decoration: none;
 			line-height: 40px;
 			height: 40px;
@@ -37,12 +37,13 @@
 <p align="center" class="mine">Docker LNMP</p>
 
 <p class="desc">
-	Version：3.2<br />
+	Version：3.3<br />
 	Time：<?= date_default_timezone_get() . "&nbsp;/&nbsp;" . date("Y-m-d H:i:s");?>
 </p>
 
 <footer>
-	<a href="https://github.com/exc-soft/docker-lnmp" target="_blank">Get Documentation</a>
+	<a href="phpinfo.php" target="_blank">See PHP Info</a>
+	<a href="https://github.com/Git2Frank/docker-lnmp" target="_blank">Get Documentation</a>
 
 	<p style="color:#ccc;font-size:12px;margin-top:100px;">
 		&copy; <?php echo date("Y")?>&nbsp;exc soft

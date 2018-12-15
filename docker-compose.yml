@@ -15,29 +15,31 @@ services:
         - ./work/components/nginx/log:/var/log/nginx:rw
       restart: always
       networks:
-        - net-php72
+        - net-php73
 
   ### PHP container #########################################
 
-  php72:
+  php73:
       build:
-        context: ./build/php72
+        context: ./build/php73
         args:
           TIME_ZONE: ${GLOBAL_TIME_ZONE}
           CHANGE_SOURCE: ${GLOBAL_CHANGE_SOURCE}
       expose:
-        - "9000"
+        - "${PHP_PORT}"
       volumes:
         - ./work/wwwroot:/etc/nginx/html:rw
-        - ./work/components/php72/config/php.ini:/usr/local/etc/php/php.ini:ro
-        - ./work/components/php72/config/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-        - ./work/components/php72/log:/var/log:rw
-        - ./work/components/php72/start.sh:/home/start.sh:rw
-        - ./work/components/php72/backup:/backup:rw
-        - ./work/components/php72/cron.d:/etc/cron.d:rw
+        - ./work/components/php73/config/php.ini:/usr/local/etc/php/php.ini:ro
+        - ./work/components/php73/config/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+        - ./work/components/php73/log:/var/log:rw
+        - ./work/components/php73/start.sh:/home/start.sh:rw
+        - ./work/components/php73/backup:/backup:rw
+        - ./work/components/php73/cron.d:/etc/cron.d:rw
       restart: always
+      environment:
+        XDEBUG_CONFIG: remote_enable=1 remote_connect_back=0 remote_host=${XDEBUG_HOST} remote_port=${XDEBUG_PORT} idekey=${XDEBUG_IDEKEY}
       networks:
-        - net-php72
+        - net-php73
         - net-mysql
         - net-redis
 
@@ -75,7 +77,7 @@ services:
   ### Redis container #########################################
 
   redis:
-      image: redis:4.0
+      image: redis:5.0
       ports:
         - "${REDIS_PORT}:6379"
       volumes:
@@ -86,6 +88,6 @@ services:
         - net-redis
 
 networks:
-  net-php72:
+  net-php73:
   net-mysql:
   net-redis:

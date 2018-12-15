@@ -1,4 +1,4 @@
-## Docker LNMP 3.2
+## Docker LNMP 3.3
 
 Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在短时间内随意构建不同版本的相关服务、环境统一分布在不同服务器等，使开发者能够更专注于开发业务本身。
 
@@ -12,8 +12,8 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 
 ##### 版本及组件
 
-* 当前版本：3.2
-* 自带组件：PHP/FPM 7.2、Nginx latest、Mysql 8.0、phpMyAdmin/phpMyAdmin、Redis 4.0
+* 当前版本：3.3
+* 自带组件：PHP/FPM 7.3、Nginx latest、Mysql 8.0、phpMyAdmin/phpMyAdmin、Redis 5.0
 
 ##### 目录结构
 
@@ -54,10 +54,10 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
     sudo docker ps
     
     # 启动部分服务在后边加服务名，不加表示启动所有，-d 表示在后台运行
-    sudo docker-compose up [nginx|php72|mysql|phpmyadmin|redis] -d
+    sudo docker-compose up [nginx|php73|mysql|phpmyadmin|redis] -d
     
     # 停止和启动类似
-    sudo docker-compose stop [nginx|php72|mysql|phpmyadmin|redis]
+    sudo docker-compose stop [nginx|php73|mysql|phpmyadmin|redis]
 
     # 删除所有未运行的容器
     sudo docker rm $(docker ps -a -q)
@@ -68,9 +68,9 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 ##### 修改镜像文件怎么处理？
     
     # 比如在 php 里新增一个扩展
-    # 1、更改对应的 docker-lnmp/build/php72/dockerfile
+    # 1、更改对应的 docker-lnmp/build/php73/dockerfile
     # 2、重新构建镜像
-    sudo docker-compose build [php72|...]
+    sudo docker-compose build [php73|...]
 
 ##### 如何设置开机启动服务？
 
@@ -102,7 +102,7 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 
 ##### 如何使用 PHP 组件里的计划任务？
 
-直接在 /work/components/php72/cron.d 新建 crontab 文件或者使用自带的 task 就行了，比如做数据库备份计划可以将备份的文件保存到 cron.d 同级 backup 目录下面，其中有几个坑都趟平了可以看下 task 文件里的注释说明，另外不用担心容器重启后计划任务停止，只要容器在运行你的任务就在运行。
+直接在 /work/components/php73/cron.d 新建 crontab 文件或者使用自带的 task 就行了，比如做数据库备份计划可以将备份的文件保存到 cron.d 同级 backup 目录下面，其中有几个坑都趟平了可以看下 task 文件里的注释说明，另外不用担心容器重启后计划任务停止，只要容器在运行你的任务就在运行。
 
 ##### 其他的坑
 
