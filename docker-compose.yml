@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 services:
 
   ### Nginx container #########################################
@@ -40,13 +40,13 @@ services:
         XDEBUG_CONFIG: remote_enable=1 remote_connect_back=0 remote_host=${XDEBUG_HOST} remote_port=${XDEBUG_PORT} idekey=${XDEBUG_IDEKEY}
       networks:
         - net-php73
-        - net-mysql
+        - net-db
         - net-redis
 
-  ### Mysql container #########################################
+  ### Database container #########################################
 
-  mysql:
-      image: mysql:8.0
+  db:
+      image: mariadb:10.4
       ports:
         - "${MYSQL_PORT}:3306"
       volumes:
@@ -57,7 +57,7 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       networks:
-        - net-mysql
+        - net-db
 
   ### PhpMyAdmin container ####################################
 
@@ -71,7 +71,7 @@ services:
       volumes:
         - ./work/components/phpmyadmin/sessions:/sessions:rw
       networks:
-        - net-mysql
+        - net-db
 
 
   ### Redis container #########################################
@@ -89,5 +89,5 @@ services:
 
 networks:
   net-php73:
-  net-mysql:
+  net-db:
   net-redis:

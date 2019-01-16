@@ -13,7 +13,7 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 ##### 版本及组件
 
 * 当前版本：3.3
-* 自带组件：PHP/FPM 7.3、Nginx latest、Mysql 8.0、phpMyAdmin/phpMyAdmin、Redis 5.0
+* 自带组件：PHP/FPM 7.3、Nginx latest、MariaDB 10.4、phpMyAdmin/phpMyAdmin、Redis 5.0
 
 ##### 目录结构
 
@@ -54,10 +54,10 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
     sudo docker ps
     
     # 启动部分服务在后边加服务名，不加表示启动所有，-d 表示在后台运行
-    sudo docker-compose up [nginx|php73|mysql|phpmyadmin|redis] -d
+    sudo docker-compose up [nginx|php73|db|phpmyadmin|redis] -d
     
     # 停止和启动类似
-    sudo docker-compose stop [nginx|php73|mysql|phpmyadmin|redis]
+    sudo docker-compose stop [nginx|php73|db|phpmyadmin|redis]
 
     # 删除所有未运行的容器
     sudo docker rm $(docker ps -a -q)
@@ -81,10 +81,10 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
     # 重启测试
     sudo reboot
 
-##### 如何在 php 里连接 Mysql 和 Redis？
+##### 如何在 php 里连接 MariaDB 和 Redis？
 
     <?php
-        // 连接 Mysql
+        // 连接 MariaDB
         $user = "root";
         $pass = "DockerLNMP";
         $dbh = new PDO('mysql:host=mysql;dbname=mysql', $user, $pass);
