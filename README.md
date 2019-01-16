@@ -30,10 +30,10 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 
 #### 开始安装
 
-没有安装 Docker 的同学移步 [安装教程](https://github.com/exc-soft/docker-lnmp#安装-docker-及相关工具)
+没有安装 Docker 的同学移步 [安装教程](https://github.com/Git2Frank/docker-lnmp#安装-docker-及相关工具)
 
     cd ~/
-    git clone https://github.com/exc-soft/docker-lnmp.git
+    git clone https://github.com/Git2Frank/docker-lnmp.git
 
     cd docker-lnmp
     cp .env-example .env
@@ -137,6 +137,8 @@ Docker LNMP 可以构建出基于 Docker 的 PHP 开发环境，其优势有在�
 DaoCloud 加速器：http://guide.daocloud.io/dcs/daocloud-9153151.html
 
 腾讯云加速器：https://www.qcloud.com/document/product/457/7207
+
+中科大镜像源：http://mirrors.ustc.edu.cn/help/dockerhub.html
 
 ## License
 MIT
