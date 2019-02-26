@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3'
 services:
 
   ### Nginx container #########################################
@@ -9,7 +9,8 @@ services:
         - "${HTTP_PORT}:80"
         - "${HTTPS_PORT}:443"
       volumes:
-        - ./work/wwwroot:/etc/nginx/html/:rw
+        - sockets:/var/run
+        - ./work/wwwroot:/etc/nginx/html:rw
         - ./work/components/nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro
         - ./work/components/nginx/config/conf.d:/etc/nginx/conf.d:ro
         - ./work/components/nginx/log:/var/log/nginx:rw
@@ -29,14 +30,16 @@ services:
       expose:
         - "${PHP_PORT}"
       volumes:
+        - sockets:/var/run
         - ./work/wwwroot:/etc/nginx/html:rw
         - ./work/components/php73/config/php.ini:/usr/local/etc/php/php.ini:ro
-        - ./work/components/php73/config/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-        - ./work/components/php73/conf.d:/usr/local/etc/php/conf.d:rw
+        - ./work/components/php73/config/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+        - ./work/components/php73/config/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+        - ./work/components/php73/conf.d:/usr/local/etc/php/conf.d:ro
+        - ./work/components/php73/cron.d:/etc/cron.d:ro
         - ./work/components/php73/log:/var/log:rw
         - ./work/components/php73/start.sh:/home/start.sh:rw
         - ./work/components/php73/backup:/backup:rw
-        - ./work/components/php73/cron.d:/etc/cron.d:rw
       restart: always
       networks:
         - net-php73
@@ -97,3 +100,6 @@ networks:
   net-php73:
   net-db:
   net-redis:
+
+volumes:
+  sockets:
