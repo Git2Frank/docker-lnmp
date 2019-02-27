@@ -18,14 +18,14 @@ RUN if [ $CHANGE_SOURCE = true ]; then \
 	apt-get -o Acquire::Check-Valid-Until=false update && apt-get -y upgrade \
 	; \
 # Install Base Components
-	apt-get install -y --no-install-recommends mysql-client libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev libzip-dev ntpdate cron vim unzip git
+	apt-get install -y --no-install-recommends mysql-client libc-client-dev libkrb5-dev libpq-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev libzip-dev ntpdate cron vim unzip git
 
 ####################################################################################
 # Install Extension
 ####################################################################################
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
-	docker-php-ext-install -j$(nproc) sockets pdo pdo_mysql mysqli gd zip json fileinfo imap mbstring openssl opcache \
+	docker-php-ext-install -j$(nproc) sockets pdo pdo_mysql mysqli gd zip json fileinfo mbstring openssl opcache \
 	; \
 # Redis
 	pecl install redis-4.2.0 \
