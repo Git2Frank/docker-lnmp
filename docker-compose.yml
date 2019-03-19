@@ -73,8 +73,8 @@ services:
       environment:
         PMA_ARBITRARY: ${PMA_ARBITRARY}
         PMA_HOST: db
-        PMA_USER: ${MYSQL_USER}
-        PMA_PASSWORD: ${MYSQL_PASSWORD}
+        PMA_USER: root
+        PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       restart: always
       ports:
         - "${PMA_PORT}:80"
